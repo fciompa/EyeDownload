@@ -31,6 +31,8 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':common')
+    implementation project(path: ':repository')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "androidx.appcompat:appcompat:$appcompat"
@@ -48,6 +50,10 @@ dependencies {
     testImplementation "junit:junit:$junit"
 
     //android test
+    androidTestImplementation project(path: ':webservice')
+    androidTestImplementation project(path: ':storage')
+    androidTestImplementation "androidx.room:room-runtime:$room"
+
     androidTestImplementation "androidx.test:runner:$runner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
     androidTestImplementation "androidx.arch.core:core-testing:$core_testing"

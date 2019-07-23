@@ -1,4 +1,4 @@
-package com.ciompa.cleverlance.repository
+package com.ciompa.cleverlance.common
 
 enum class DownloadPictureError {
     /**

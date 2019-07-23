@@ -1,6 +1,7 @@
 package com.ciompa.cleverlance.repository
 
 import androidx.test.runner.AndroidJUnit4
+import com.ciompa.cleverlance.common.DownloadPictureError
 import com.ciompa.cleverlance.common.HashUtils
 import com.ciompa.cleverlance.common.PICTURE
 import kotlinx.coroutines.runBlocking

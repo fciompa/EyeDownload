@@ -1,12 +1,14 @@
 package com.ciompa.cleverlance.repository
 
 import androidx.annotation.VisibleForTesting
+import com.ciompa.cleverlance.common.ConnectivityMonitor
+import com.ciompa.cleverlance.common.DownloadPictureError
 import com.ciompa.cleverlance.storage.PropertyEntity
 import com.ciompa.cleverlance.storage.Storage
 import com.ciompa.cleverlance.webservice.WebService
 
 class RepositoryImp(
-    private val connectivityMonitor: com.ciompa.cleverlance.common.ConnectivityMonitor,
+    private val connectivityMonitor: ConnectivityMonitor,
     private val webService: WebService,
     private val storage: Storage
 ) : Repository {
@@ -18,10 +20,10 @@ class RepositoryImp(
             return DownloadPictureError.NoInternet
         }
     }
-
     private suspend fun download(userName: String, authorization: String): DownloadPictureError {
 
         val response = webService.downloadImage(userName, authorization)
+
 
         return when (response.code) {
             200 -> setDownloadedPicture(response.imageEncoded)
@@ -67,8 +69,7 @@ class RepositoryImp(
         return userLogin?.value ?: ""
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    suspend fun setUserLogin(userName: String) {
+    override suspend fun setUserLogin(userName: String) {
         var userLoggingProperty = storage.dao.property(USER_LOGIN)
 
         if (userLoggingProperty == null) {
