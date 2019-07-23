@@ -1,6 +1,7 @@
 package com.ciompa.cleverlance.webservice
 
 import androidx.test.runner.AndroidJUnit4
+import com.ciompa.cleverlance.common.HashUtils
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before

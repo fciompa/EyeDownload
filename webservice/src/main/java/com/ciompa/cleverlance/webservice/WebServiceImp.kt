@@ -22,7 +22,7 @@ class WebServiceImp: WebService {
 
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            logging.level = HttpLoggingInterceptor.Level.BODY
             httpClient.addInterceptor(logging)
         }
 

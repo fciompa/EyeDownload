@@ -1,4 +1,4 @@
-package com.ciompa.cleverlance.webservice
+package com.ciompa.cleverlance.common
 
 import java.security.MessageDigest
 
