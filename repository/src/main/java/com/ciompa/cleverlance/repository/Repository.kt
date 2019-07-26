@@ -33,4 +33,10 @@ interface Repository {
      */
     suspend fun setUserLogin(userName: String)
 
+    /**
+     * Set picture
+     *
+     * @param picture Base64-encoded picture, or empty string
+     */
+    suspend fun setPicture(picture: String)
 }

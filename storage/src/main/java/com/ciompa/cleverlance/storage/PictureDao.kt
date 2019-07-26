@@ -6,7 +6,7 @@ import androidx.room.Query
 
 interface PictureDao {
     @Query("SELECT * FROM picture")
-    suspend fun picture(): PictureEntity
+    suspend fun picture(): PictureEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPicture(entity: PictureEntity)

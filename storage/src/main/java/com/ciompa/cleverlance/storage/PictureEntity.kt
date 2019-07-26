@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "picture")
 data class PictureEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
-    @ColumnInfo(name = "value", index = true) val value: String = ""
+    @ColumnInfo(name = "value", index = true) var value: String = ""
 )

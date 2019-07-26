@@ -1,17 +1,19 @@
 package com.ciompa.cleverlance.repository
 
-import androidx.annotation.VisibleForTesting
 import com.ciompa.cleverlance.common.ConnectivityMonitor
 import com.ciompa.cleverlance.common.DownloadPictureError
+import com.ciompa.cleverlance.common.inject
+import com.ciompa.cleverlance.storage.PictureEntity
 import com.ciompa.cleverlance.storage.PropertyEntity
 import com.ciompa.cleverlance.storage.Storage
 import com.ciompa.cleverlance.webservice.WebService
 
 class RepositoryImp(
-    private val connectivityMonitor: ConnectivityMonitor,
-    private val webService: WebService,
-    private val storage: Storage
+    private val connectivityMonitor: ConnectivityMonitor
 ) : Repository {
+
+    private val webService: WebService by inject()
+    private val storage: Storage by inject()
 
     override suspend fun downloadPicture(userName: String, authorization: String): DownloadPictureError {
         if (connectivityMonitor.isConnected()) {
@@ -48,20 +50,19 @@ class RepositoryImp(
     }
 
     override suspend fun getPicture(): String {
-        val userLogin = storage.dao.property(PICTURE)
-        return userLogin?.value ?: ""
+        val pictureEntity = storage.dao.picture()
+        return pictureEntity?.value ?: ""
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    suspend fun setPicture(picture: String) {
-        var pictureProperty = storage.dao.property(PICTURE)
+    override suspend fun setPicture(picture: String) {
+        var pictureEntity = storage.dao.picture()
 
-        if (pictureProperty == null) {
-            pictureProperty = PropertyEntity(0, PICTURE, "")
+        if (pictureEntity == null) {
+            pictureEntity = PictureEntity(0, "")
         }
 
-        pictureProperty.value = picture
-        storage.dao.insertProperty(pictureProperty)
+        pictureEntity.value = picture
+        storage.dao.insertPicture(pictureEntity)
     }
 
     override suspend fun getUserLogin(): String {
@@ -82,7 +83,6 @@ class RepositoryImp(
 
     companion object {
         private const val USER_LOGIN = "UserLogin"
-        private const val PICTURE = "Picture"
 
     }
 }

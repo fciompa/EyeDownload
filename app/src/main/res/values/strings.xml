@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Cleverlance Mobile Test App</string>
+
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_download_image">Download image</string>
+    <string name="invalid_username">Username can not be empty</string>
+    <string name="invalid_password">Password must be >3 characters</string>
+    <string name="download_image_message_ok">Image has been downloaded successfully</string>
+    <string name="download_image_message_no_internet">Image cannot be downloaded, there is no internet connection
+    </string>
+    <string name="download_image_message_unauthorized">Image cannot be downloaded, user credentials are not valid
+    </string>
+    <string name="download_image_message_unknown_error">Image cannot be downloaded, there is unknown error</string>
+
 </resources>

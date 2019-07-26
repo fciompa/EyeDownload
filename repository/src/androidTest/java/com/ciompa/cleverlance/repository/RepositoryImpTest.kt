@@ -1,5 +1,6 @@
 package com.ciompa.cleverlance.repository
 
+import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.ciompa.cleverlance.common.DownloadPictureError
 import com.ciompa.cleverlance.common.HashUtils
@@ -9,6 +10,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
@@ -16,11 +18,12 @@ import org.koin.test.inject
 @RunWith(AndroidJUnit4::class)
 class RepositoryImpTest : AutoCloseKoinTest() {
 
-    private val repository by inject<RepositoryImp>()
+    private val repository by inject<Repository>()
 
     @Before
     fun before() {
         startKoin {
+            androidContext(InstrumentationRegistry.getTargetContext())
             modules(repositoryModule)
         }
     }

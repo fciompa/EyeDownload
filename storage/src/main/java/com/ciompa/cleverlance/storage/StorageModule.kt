@@ -1,23 +1,14 @@
 package com.ciompa.cleverlance.storage
 
-//TODO Find out how to have module for tests
+import androidx.room.Room
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-//val storageModule = module {
-//    single {
-//        Room.databaseBuilder(
-//            androidContext(),
-//            Storage::class.java,
-//            "App.db"
-//        ).build()
-//    }
-//}
-
-//val storageModuleTest = module {
-//
-//    single {
-//        Room.inMemoryDatabaseBuilder(
-//            InstrumentationRegistry.getTargetContext(),
-//            Storage::class.java
-//        ).build()
-//    }
-//}
+val storageModule = module {
+    single {
+        Room.inMemoryDatabaseBuilder(
+            androidContext(),
+            Storage::class.java
+        ).build()
+    }
+}

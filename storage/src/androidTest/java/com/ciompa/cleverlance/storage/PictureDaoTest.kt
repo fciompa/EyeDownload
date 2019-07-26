@@ -1,5 +1,6 @@
 package com.ciompa.cleverlance.storage
 
+import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.ciompa.cleverlance.common.PICTURE
 import kotlinx.coroutines.runBlocking
@@ -7,6 +8,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
@@ -19,6 +21,7 @@ class PictureDaoTest : AutoCloseKoinTest() {
     @Before
     fun before() {
         startKoin {
+            androidContext(InstrumentationRegistry.getTargetContext())
             modules(storageModule)
         }
     }

@@ -1,11 +1,13 @@
 package com.ciompa.cleverlance.storage
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.InstrumentationRegistry
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
@@ -25,6 +27,7 @@ class PropertyDaoTest : AutoCloseKoinTest() {
     @Before
     fun before() {
         startKoin {
+            androidContext(InstrumentationRegistry.getTargetContext())
             modules(storageModule)
         }
     }

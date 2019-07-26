@@ -1,13 +1,16 @@
 package com.ciompa.cleverlance.domain
 
+import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.ciompa.cleverlance.common.DownloadPictureError
 import com.ciompa.cleverlance.common.PICTURE_SIZE
+import com.ciompa.cleverlance.repository.repositoryModule
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
@@ -20,7 +23,8 @@ class DomainImpTest : AutoCloseKoinTest() {
     @Before
     fun before() {
         startKoin {
-            modules(domainModule)
+            androidContext(InstrumentationRegistry.getTargetContext())
+            modules(listOf(domainModule, repositoryModule))
         }
     }
 
