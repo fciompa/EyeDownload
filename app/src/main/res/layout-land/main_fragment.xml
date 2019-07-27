@@ -24,7 +24,7 @@
             tools:context="ui.main.MainView">
 
         <EditText
-                android:id="@+id/username"
+                android:id="@+id/usernameEditText"
                 android:layout_width="@dimen/zero_margin"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -39,11 +39,11 @@
                 app:showError="@{viewModel.usernameError}"
                 app:visibleGone="@{!viewModel.downloading}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/loading"
+                app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordEditText"
                 android:layout_width="@dimen/zero_margin"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -61,12 +61,12 @@
                 app:showError="@{viewModel.passwordError}"
                 app:onEditorAction="@{viewModel}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/loading"
-                app:layout_constraintTop_toBottomOf="@+id/username"/>
+                app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/usernameEditText"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/download_image"
+                android:id="@+id/downloadButton"
                 android:enabled="@{viewModel.downloadButtonEnabled}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,13 +79,13 @@
                 android:layout_marginEnd="@dimen/base_margin"
                 android:layout_marginRight="@dimen/base_margin"
                 app:visibleGone="@{!viewModel.downloading}"
-                app:layout_constraintTop_toBottomOf="@+id/password"
+                app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/loading"
-        />
+                app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
         <ProgressBar
-                android:id="@+id/loading"
+                android:id="@+id/loadingProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -112,13 +112,13 @@
                 android:layout_marginLeft="@dimen/base_margin"
                 android:layout_marginStart="@dimen/base_margin"
                 app:visibleGone="@{viewModel.downloading}"
-                app:layout_constraintTop_toBottomOf="@+id/loading"
+                app:layout_constraintTop_toBottomOf="@+id/loadingProgressBar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
         />
 
         <ImageView
-                android:id="@+id/downloadedImage"
+                android:id="@+id/downloadedViewImage"
                 android:layout_width="@dimen/image_size"
                 android:layout_height="@dimen/image_size"
                 android:src="@{viewModel.bitmapDrawable}"
@@ -131,7 +131,7 @@
                 app:visibleGone="@{viewModel.downloadedImageVisible}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/loading"
+                app:layout_constraintStart_toEndOf="@+id/loadingProgressBar"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars[0]"
         />

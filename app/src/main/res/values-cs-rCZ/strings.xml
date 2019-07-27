@@ -10,7 +10,7 @@
     <string name="download_image_message_ok">Stažení obrázku bylo úspěné</string>
     <string name="download_image_message_no_internet">Obrázek nemůže byt stažen, jelikož není připojení k internetu
     </string>
-    <string name="download_image_message_unauthorized">Obrázek nemůže byt stažen, jelokož přihlašovací údaje jsou
+    <string name="download_image_message_unauthorized">Obrázek nemůže byt stažen, jelikož přihlašovací údaje jsou
         neplatné
     </string>
     <string name="download_image_message_unknown_error">Obrázek nemůže byt stažen, jelikož při stahování došlo k chybě

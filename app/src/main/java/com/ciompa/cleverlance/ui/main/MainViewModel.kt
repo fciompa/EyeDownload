@@ -109,11 +109,9 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
             if (result == DownloadPictureError.Ok) {
                 bitmapDrawable = BitmapDrawable(BitmapWorker().decodeSampledBitmapFromResource(picture, 200, 200))
                 downloadedImageVisible = true
-                downloadButtonEnabled = true
             } else {
                 bitmapDrawable = null
                 downloadedImageVisible = false
-                downloadButtonEnabled = false
             }
 
             downloading = false
