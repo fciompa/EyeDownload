@@ -55,6 +55,13 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
         }
 
     @Bindable
+    var downloadButtonEnabled: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.downloadButtonEnabled)
+        }
+
+    @Bindable
     var downloadedImageVisible: Boolean = false
         set(value) {
             field = value
@@ -62,7 +69,7 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
         }
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             username = domain.getUserLogin()
             password = ""
         }
@@ -85,24 +92,29 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
             if (result == DownloadPictureError.Ok) {
                 bitmapDrawable = BitmapDrawable(BitmapWorker().decodeSampledBitmapFromResource(picture, 200, 200))
                 downloadedImageVisible = true
+                downloadButtonEnabled = true
             } else {
                 bitmapDrawable = null
                 downloadedImageVisible = false
+                downloadButtonEnabled = false
             }
 
             downloading = false
-            downloadedImageVisible = false
         }
     }
 
 
     private fun loginDataChanged() {
         if (!isUserNameValid(username)) {
-            postFormState(FormState(R.string.invalid_username, 0, false))
+            postFormState(FormState(R.string.invalid_username, 0))
+            downloadButtonEnabled = false
         } else if (!isPasswordValid(password)) {
-            postFormState(FormState(0, R.string.invalid_password, false))
+            postFormState(FormState(0, R.string.invalid_password))
+            downloadButtonEnabled = false
         } else {
-            postFormState(FormState(0, 0, true))
+            postFormState(FormState(0, 0))
+            downloadButtonEnabled = true
+
         }
     }
 

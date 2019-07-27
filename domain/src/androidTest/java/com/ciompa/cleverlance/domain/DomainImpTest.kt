@@ -18,7 +18,7 @@ import org.koin.test.inject
 @RunWith(AndroidJUnit4::class)
 class DomainImpTest : AutoCloseKoinTest() {
 
-    private val domain by inject<DomainImp>()
+    private val domain by inject<Domain>()
 
     @Before
     fun before() {

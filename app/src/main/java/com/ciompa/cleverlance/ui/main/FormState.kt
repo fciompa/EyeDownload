@@ -5,6 +5,5 @@ package com.ciompa.cleverlance.ui.main
  */
 data class FormState(
     val usernameError: Int? = null,
-    val passwordError: Int? = null,
-    val isDataValid: Boolean = false
+    val passwordError: Int? = null
 )

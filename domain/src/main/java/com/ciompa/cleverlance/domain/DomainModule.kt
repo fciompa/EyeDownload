@@ -4,7 +4,7 @@ import org.koin.dsl.module
 
 val domainModule = module {
 
-    single {
+    single<Domain> {
         DomainImp()
     }
 

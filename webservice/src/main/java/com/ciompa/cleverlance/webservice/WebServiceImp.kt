@@ -1,7 +1,5 @@
 package com.ciompa.cleverlance.webservice
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -35,14 +33,13 @@ class WebServiceImp: WebService {
             .create(WebServiceApi::class.java)
     }
 
-    override suspend fun downloadImage( userName: String, authorization: String):
-            DownloadImageResponse = withContext(Dispatchers.IO) {
+    override suspend fun downloadImage(userName: String, authorization: String): DownloadImageResponse {
 
         val mediaType = MEDIA_TYPE.toMediaTypeOrNull()
         val body = (USER_NAME_REQUEST_BODY + userName).toRequestBody(mediaType)
 
         val response = webServiceApi.downloadImage(authorization, body)
 
-        return@withContext DownloadImageResponse(response.body()?.image, response.code(), response.message())
+        return DownloadImageResponse(response.body()?.image, response.code(), response.message())
     }
 }
