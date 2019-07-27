@@ -12,5 +12,6 @@
     <string name="download_image_message_unauthorized">Image cannot be downloaded, user credentials are not valid
     </string>
     <string name="download_image_message_unknown_error">Image cannot be downloaded, there is unknown error</string>
+    <string name="loadingTex">Downloading</string>
 
 </resources>

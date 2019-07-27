@@ -18,11 +18,12 @@ import java.io.Serializable
 
 class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Serializable {
 
-    var formState = MutableLiveData<Event<FormState>>()
-    private fun postFormState(value: FormState) = formState.postValue(Event(value))
-
     var downloadImageResult = MutableLiveData<Event<DownloadImageResult>>()
     private fun postDownloadImageResult(value: DownloadImageResult) = downloadImageResult.postValue(Event(value))
+
+    var hideKeyboard = MutableLiveData<Event<Boolean>>()
+    private fun postHideKeyboard() = hideKeyboard.postValue(Event(true))
+
 
     @Bindable
     var username: String = ""
@@ -33,11 +34,25 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
         }
 
     @Bindable
+    var usernameError: Int = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.usernameError)
+        }
+
+    @Bindable
     var password: String = ""
         set(value) {
             field = value
             loginDataChanged()
             notifyPropertyChanged(BR.password)
+        }
+
+    @Bindable
+    var passwordError: Int = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.passwordError)
         }
 
     @Bindable
@@ -77,6 +92,8 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
 
     fun downloadImage() {
         downloading = true
+        downloadedImageVisible = false
+        postHideKeyboard()
         viewModelScope.launch(Dispatchers.Default) {
             val result = domain.downloadPicture(username, password)
             val picture = domain.getPicture()
@@ -106,15 +123,15 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
 
     private fun loginDataChanged() {
         if (!isUserNameValid(username)) {
-            postFormState(FormState(R.string.invalid_username, 0))
+            usernameError = R.string.invalid_username
             downloadButtonEnabled = false
         } else if (!isPasswordValid(password)) {
-            postFormState(FormState(0, R.string.invalid_password))
+            passwordError = R.string.invalid_password
             downloadButtonEnabled = false
         } else {
-            postFormState(FormState(0, 0))
+            usernameError = 0
+            passwordError = 0
             downloadButtonEnabled = true
-
         }
     }
 

@@ -1,9 +1,11 @@
 package com.ciompa.cleverlance.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -31,23 +33,23 @@ class MainView : Fragment() {
         super.onActivityCreated(savedInstanceState)
         binding.viewModel = viewModel
 
-        viewModel.formState.observe(this, Observer {
-            val formState = it.getContentIfNotHandled()
-            if (formState != null) {
-                when {
-                    formState.passwordError != null && formState.passwordError != 0 ->
-                        Toast.makeText(requireActivity(), formState.passwordError, Toast.LENGTH_LONG).show()
-
-                    formState.usernameError != null && formState.usernameError != 0 ->
-                        Toast.makeText(requireActivity(), formState.usernameError, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-
         viewModel.downloadImageResult.observe(this, Observer {
             val downloadImageResult = it.getContentIfNotHandled()
             if (downloadImageResult != null) {
-                Toast.makeText(requireActivity(), downloadImageResult.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireActivity(), downloadImageResult.message, Toast.LENGTH_LONG).show()
+            }
+        })
+
+        viewModel.hideKeyboard.observe(this, Observer {
+            val hideKeyboard = it.getContentIfNotHandled()
+            if (hideKeyboard != null) {
+                val inputMethodManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+                val windowToken = view!!.applicationWindowToken
+                if (windowToken != null) {
+                    inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+                }
             }
         })
     }
