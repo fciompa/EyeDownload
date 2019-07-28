@@ -4,10 +4,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         package="com.ciompa.cleverlance">
 
-    <uses-sdk android:targetSdkVersion="28" android:minSdkVersion="15"
-              tools:overrideLibrary="android_libs.ub_uiautomator"
-              tools:ignore="GradleOverrides"/>
-
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
