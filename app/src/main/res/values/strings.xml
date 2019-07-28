@@ -13,5 +13,6 @@
     </string>
     <string name="download_image_message_unknown_error">Image cannot be downloaded, there is unknown error</string>
     <string name="loadingTex">Downloading</string>
+    <string name="image">Image</string>
 
 </resources>

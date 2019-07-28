@@ -35,14 +35,14 @@ class PictureDaoTest : AutoCloseKoinTest() {
     fun insert() = runBlocking {
         Assert.assertNull(storage.dao.picture())
         storage.dao.insertPicture(PictureEntity(0, PICTURE))
-        Assert.assertEquals(PICTURE, storage.dao.picture().value)
+        Assert.assertEquals(PICTURE, storage.dao.picture()?.value)
     }
 
     @Test
     fun delete() = runBlocking {
         Assert.assertNull(storage.dao.picture())
         storage.dao.insertPicture(PictureEntity(0, PICTURE))
-        Assert.assertEquals(PICTURE, storage.dao.picture().value)
+        Assert.assertEquals(PICTURE, storage.dao.picture()?.value)
 
         storage.dao.deletePicture()
         Assert.assertNull(storage.dao.picture())

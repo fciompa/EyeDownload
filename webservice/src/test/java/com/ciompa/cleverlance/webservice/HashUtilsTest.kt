@@ -1,9 +1,8 @@
 package com.ciompa.cleverlance.webservice
 
+import com.ciompa.cleverlance.common.HashUtils
 import org.junit.Assert
 import org.junit.Test
-
-import org.junit.Assert.*
 
 class HashUtilsTest {
 

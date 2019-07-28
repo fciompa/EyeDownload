@@ -16,4 +16,5 @@
     <string name="download_image_message_unknown_error">Obrázek nemůže byt stažen, jelikož při stahování došlo k chybě
     </string>
     <string name="loadingTex">Stahování</string>
+    <string name="image">Obrázek</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.ciompa.cleverlance.common
 
 /**
- * Get state of intertnet connectivity
+ * Get state of internet connectivity
  */
 interface ConnectivityMonitor {
     /**

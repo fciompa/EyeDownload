@@ -5,7 +5,7 @@ import org.koin.core.parameter.ParametersDefinition
 import org.koin.core.qualifier.Qualifier
 
 /**
- * inject lazily given dependency for Android koincomponent
+ * inject lazily given dependency for Android koin component
  * @param qualifier - bean qualifier / optional
  * @param scope
  * @param parameters - injection parameters
@@ -16,7 +16,7 @@ inline fun <reified T : Any> inject(
 ) = lazy { get<T>(qualifier, parameters) }
 
 /**
- * get given dependency for Android koincomponent
+ * get given dependency for Android koin component
  * @param name - bean name
  * @param scope
  * @param parameters - injection parameters
