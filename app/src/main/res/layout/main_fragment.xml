@@ -136,5 +136,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:srcCompat="@tools:sample/avatars[0]"
         />
+
+        <TextView
+                android:id="@+id/downloadResultMessageTextView"
+                android:text="@{viewModel.downloadResultMessage}"
+                android:layout_width="@dimen/zero_margin"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/base_margin"
+                android:layout_marginEnd="@dimen/triple_base_margin"
+                android:layout_marginRight="@dimen/triple_base_margin"
+                android:layout_marginLeft="@dimen/triple_base_margin"
+                android:layout_marginStart="@dimen/triple_base_margin"
+                app:visibleGone="@{viewModel.downloadResultMessageVisible}"
+                app:layout_constraintTop_toBottomOf="@+id/downloadButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

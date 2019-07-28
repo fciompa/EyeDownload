@@ -77,6 +77,20 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
         }
 
     @Bindable
+    var downloadResultMessage: Int = R.string.download_image_message_ok
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.downloadResultMessage)
+        }
+
+    @Bindable
+    var downloadResultMessageVisible: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.downloadResultMessageVisible)
+        }
+
+    @Bindable
     var downloadedImageVisible: Boolean = false
         set(value) {
             field = value
@@ -92,6 +106,7 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
 
     fun downloadImage() {
         downloading = true
+        downloadResultMessageVisible = false
         downloadedImageVisible = false
         postHideKeyboard()
         viewModelScope.launch(Dispatchers.Default) {
@@ -104,13 +119,16 @@ class MainViewModel(private val domain: Domain) : ViewModel(), Observable, Seria
                 DownloadPictureError.UnknownError -> R.string.download_image_message_unknown_error
             }
 
-            postDownloadImageResult(DownloadImageResult(result, message, picture))
+            postDownloadImageResult(DownloadImageResult(result, message))
+            downloadResultMessage = message
 
             if (result == DownloadPictureError.Ok) {
                 bitmapDrawable = BitmapDrawable(BitmapWorker().decodeSampledBitmapFromResource(picture, 200, 200))
+                downloadResultMessageVisible = false
                 downloadedImageVisible = true
             } else {
                 bitmapDrawable = null
+                downloadResultMessageVisible = true
                 downloadedImageVisible = false
             }
 

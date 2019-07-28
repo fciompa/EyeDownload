@@ -4,8 +4,7 @@ import com.ciompa.cleverlance.common.DownloadPictureError
 
 data class DownloadImageResult(
     val error: DownloadPictureError,
-    val message: Int,
-    val picture: ByteArray
+    val message: Int
 ) {
-    constructor() : this(DownloadPictureError.Ok, 0, ByteArray(0))
+    constructor() : this(DownloadPictureError.Ok, 0)
 }

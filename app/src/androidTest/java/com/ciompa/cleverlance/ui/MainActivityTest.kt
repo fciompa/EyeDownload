@@ -5,8 +5,7 @@ import android.content.Context
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import androidx.test.rule.ActivityTestRule
@@ -57,11 +56,24 @@ class MainActivityTest {
 
         wait2()
         isDisplayed(R.id.downloadedViewImage)
-
-        mDevice.openQuickSettings()
-
     }
 
+    @Test
+    fun download_KO() {
+
+        click(R.id.usernameEditText)
+        typeText(R.id.usernameEditText, "ciompa")
+
+        click(R.id.passwordEditText)
+        typeText(R.id.passwordEditText, "frantisekk")
+
+        click(R.id.downloadButton)
+
+        wait2()
+        isDisplayed(R.id.downloadResultMessageTextView)
+//        isDisplayedText("Obrázek nemůže byt stažen, jelikož přihlašovací údaje jsou neplatné")
+        isDisplayedText(R.string.download_image_message_unauthorized)
+    }
 
     private fun click(viewId: Int) {
         onView(withId(viewId)).perform(androidx.test.espresso.action.ViewActions.click())
@@ -73,6 +85,14 @@ class MainActivityTest {
 
     private fun isDisplayed(viewId: Int) {
         onView(withId(viewId)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun isDisplayedText(text: String) {
+        onView(withText(text)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    private fun isDisplayedText(text: Int) {
+        onView(withText(text)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     private fun wait2() {
