@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cleverlance Mobile Test App</string>
+    <string name="app_name">Eye</string>
 
-    <string name="prompt_username">Uživatelské jméno</string>
-    <string name="prompt_password">Heslo</string>
+    <string name="prompt_username">Uživatelské jméno [ciompa]</string>
+    <string name="prompt_password">Heslo [frantisek]</string>
     <string name="action_download_image">Stažení obrázku</string>
     <string name="invalid_username">Uživatelské jméno nemůže být prázdné</string>
     <string name="invalid_password">Heslo musí mít alespoň čtyři znaky</string>
