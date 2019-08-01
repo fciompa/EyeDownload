@@ -3,7 +3,6 @@ package com.ciompa.cleverlance.domain
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.ciompa.cleverlance.common.DownloadPictureError
-import com.ciompa.cleverlance.common.PICTURE_SIZE
 import com.ciompa.cleverlance.repository.repositoryModule
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -17,6 +16,8 @@ import org.koin.test.inject
 
 @RunWith(AndroidJUnit4::class)
 class DomainImpTest : AutoCloseKoinTest() {
+
+    val PICTURE_SIZE = 47559
 
     private val domain by inject<Domain>()
 
