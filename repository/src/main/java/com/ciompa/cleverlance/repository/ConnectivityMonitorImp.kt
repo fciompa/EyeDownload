@@ -3,7 +3,7 @@ package com.ciompa.cleverlance.repository
 import com.ciompa.cleverlance.common.ConnectivityMonitor
 
 /**
- * Get state of internet connectivity, each read change state to the opposite one
+ * Implementation for testing only, default value is connected, for testing purpose is added connectivity setter
  */
 class ConnectivityMonitorImp : ConnectivityMonitor {
     private var connected = true
