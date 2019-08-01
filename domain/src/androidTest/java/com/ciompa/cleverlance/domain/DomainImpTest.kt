@@ -2,7 +2,9 @@ package com.ciompa.cleverlance.domain
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import com.ciompa.cleverlance.common.ConnectivityMonitor
 import com.ciompa.cleverlance.common.DownloadPictureError
+import com.ciompa.cleverlance.repository.ConnectivityMonitorImp
 import com.ciompa.cleverlance.repository.repositoryModule
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -20,6 +22,7 @@ class DomainImpTest : AutoCloseKoinTest() {
     val PICTURE_SIZE = 47559
 
     private val domain by inject<Domain>()
+    private val connectivityMonitorImp by inject<ConnectivityMonitor>()
 
     @Before
     fun before() {
@@ -35,6 +38,7 @@ class DomainImpTest : AutoCloseKoinTest() {
         val pictureError1 = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.Ok, pictureError1)
 
+        (connectivityMonitorImp as ConnectivityMonitorImp).setConnected(false)
         val pictureError2 = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.NoInternet, pictureError2)
     }
@@ -61,8 +65,11 @@ class DomainImpTest : AutoCloseKoinTest() {
 
         val pictureError = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.Ok, pictureError)
+
+        (connectivityMonitorImp as ConnectivityMonitorImp).setConnected(false)
         val pictureError2 = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.NoInternet, pictureError2)
+
         val picture = domain.getPicture()
         Assert.assertEquals(PICTURE_SIZE, picture.size)
 
@@ -73,8 +80,12 @@ class DomainImpTest : AutoCloseKoinTest() {
 
         val pictureError1 = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.Ok, pictureError1)
+
+        (connectivityMonitorImp as ConnectivityMonitorImp).setConnected(false)
         val pictureError2 = domain.downloadPicture("ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.NoInternet, pictureError2)
+
+        (connectivityMonitorImp as ConnectivityMonitorImp).setConnected(true)
         val pictureError3 = domain.downloadPicture("Ciompa", "frantisek")
         Assert.assertEquals(DownloadPictureError.Unauthorized, pictureError3)
         val picture = domain.getPicture()
