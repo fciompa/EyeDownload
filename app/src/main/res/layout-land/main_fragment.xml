@@ -23,66 +23,83 @@
             android:paddingTop="@dimen/double_base_margin"
             tools:context="ui.main.MainView">
 
-        <EditText
-                android:id="@+id/usernameEditText"
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameTextInputLayout"
                 android:layout_width="@dimen/zero_margin"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/quadruple_base_margin"
-                android:layout_marginTop="@dimen/eightfold_base_margin"
+                android:layout_marginTop="@dimen/quadruple_base_margin"
                 android:layout_marginEnd="@dimen/quadruple_base_margin"
                 android:layout_marginLeft="@dimen/quadruple_base_margin"
                 android:layout_marginRight="@dimen/quadruple_base_margin"
                 android:hint="@string/prompt_username"
-                android:inputType="textNoSuggestions"
-                android:text="@={viewModel.username}"
-                android:selectAllOnFocus="true"
-                app:showError="@{viewModel.usernameError}"
                 app:visibleGone="@{!viewModel.downloading}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+        >
 
-        <EditText
-                android:id="@+id/passwordEditText"
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usernameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textNoSuggestions"
+                    android:text="@={viewModel.username}"
+                    app:showError="@{viewModel.usernameError}"
+                    android:selectAllOnFocus="true"
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
                 android:layout_width="@dimen/zero_margin"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/quadruple_base_margin"
-                android:layout_marginTop="@dimen/triple_base_margin"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/quadruple_base_margin"
                 android:layout_marginLeft="@dimen/triple_base_margin"
                 android:layout_marginRight="@dimen/triple_base_margin"
                 android:hint="@string/prompt_password"
-                android:imeActionLabel="@string/action_download_image"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                android:text="@={viewModel.password}"
                 app:visibleGone="@{!viewModel.downloading}"
-                app:showError="@{viewModel.passwordError}"
-                app:onEditorAction="@{viewModel}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/usernameEditText"/>
+                app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
+        >
 
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeActionLabel="@string/action_download_image"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:selectAllOnFocus="true"
+                    android:text="@={viewModel.password}"
+                    app:showError="@{viewModel.passwordError}"
+                    app:onEditorAction="@{viewModel}"
+            />
 
-        <androidx.appcompat.widget.AppCompatButton
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/downloadButton"
                 android:enabled="@{viewModel.downloadButtonEnabled}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="@string/action_download_image"
-                android:onClick="@{() -> viewModel.downloadImage()}"
                 android:layout_marginTop="@dimen/sixfold_base_margin"
                 android:layout_marginStart="@dimen/base_margin"
                 android:layout_marginLeft="@dimen/base_margin"
                 android:layout_marginEnd="@dimen/base_margin"
                 android:layout_marginRight="@dimen/base_margin"
+                android:text="@string/action_download_image"
+                android:onClick="@{() -> viewModel.downloadImage()}"
                 app:visibleGone="@{!viewModel.downloading}"
-                app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+                app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/loadingProgressBar"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        />
 
         <ProgressBar
                 android:id="@+id/loadingProgressBar"
